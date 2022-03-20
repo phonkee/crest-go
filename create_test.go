@@ -1,7 +1,7 @@
 package crest
 
 import (
-	"context"
+	"net/http"
 	"testing"
 )
 
@@ -18,7 +18,7 @@ func TestCreate(t *testing.T) {
 		}
 
 		// test create function
-		Create(func(ctx context.Context, serializer Serializer) (object Object, err error) {
+		Create(func(r *http.Request, serializer Serializer) (object Object, err error) {
 			return Object{}, nil
 		})
 

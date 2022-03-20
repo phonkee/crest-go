@@ -1,7 +1,6 @@
 package crest
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,7 +9,7 @@ import (
 )
 
 // Create converts function to http handler function
-func Create[S any, O any](fn func(ctx context.Context, serializer S) (object O, err error)) http.HandlerFunc {
+func Create[S any, O any](fn func(r *http.Request, serializer S) (object O, err error)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// unmarshal body into serializer
 		into := new(S)
