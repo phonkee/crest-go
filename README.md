@@ -26,8 +26,9 @@ func CreateUser(r *http.Request, s CreateUser) (*User, error) {
 }
 
 func init() {
-    // now if we want to register http handler we simply do
-    handler := crest.CreataHandler(CreateUser)
+    // now let's register this handler to e.g. gorilla mux router
+    r := mux.NewRouter()
+    r.Path("/api/user/", create.Handler(CreateUser)).Method(http.MethodPut)
 }
 ```
 
