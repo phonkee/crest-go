@@ -18,9 +18,11 @@ func TestCreate(t *testing.T) {
 		}
 
 		// test create function
-		Create(func(r *http.Request, serializer Serializer) (object Object, err error) {
+		handler := CreateHandler(func(r *http.Request, serializer Serializer) (object Object, err error) {
 			return Object{}, nil
 		})
+
+		_ = handler
 
 	})
 }

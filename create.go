@@ -31,7 +31,7 @@ func CreateHandler[S any, O any](
 		}
 
 		// check for resp now
-		switch responder := result.(type) {
+		switch responder := any(result).(type) {
 		case Responder:
 			w.WriteHeader(responder.StatusCode())
 			_ = responder.Write(w)

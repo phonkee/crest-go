@@ -1,6 +1,9 @@
 package crest
 
-import "net/http"
+import (
+	"net/http"
+	"reflect"
+)
 
 type Responder interface {
 	Write(w http.ResponseWriter) error
@@ -9,12 +12,14 @@ type Responder interface {
 }
 
 // Response returns full response that can be used
-func Response[T any](status int, object T) Responder {
-	return &resp[T]{
+func Response[T any](status int, object T, headers ...string) Responder {
+	result := &resp[T]{
 		status: status,
 		object: object,
 		header: make(http.Header),
 	}
+
+	return result
 }
 
 type resp[T any] struct {
@@ -28,6 +33,9 @@ func (o *resp[T]) Header() http.Header {
 }
 
 func (o *resp[T]) Write(w http.ResponseWriter) error {
+	if reflect.ValueOf(o.object).IsNil() {
+		return nil
+	}
 	return nil
 }
 
