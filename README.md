@@ -32,5 +32,15 @@ func init() {
 }
 ```
 
+We have also ability to provide handler that does not return struct type, but generic `Responder` interface.
+So let's try an example and let's suppose we have defined structures from previous example
+
+```go
+func CreateUser(*http.Request, s *CreateUser) (Responder, error) {
+    return Response(http.StatusCreated, User{ID:uuid.New().String}), nil
+}
+
+```
+
 # Author
 Peter Vrba <phonkee@phonkee.eu>
