@@ -22,7 +22,14 @@ type User struct {
 
 // CreateUser knows how to create user
 func CreateUser(r *http.Request, s *CreateUser) (*User, error) {
-    // some logic how to create user
+    // either return error
+    // return nil, crest.Error(http.status.BadRequest, nil)
+    // or return user
+    return &User{
+        ID: uuid.New().String,
+        Username: s.Username,
+        Email: s.Email,
+    }, nil
 }
 
 func init() {

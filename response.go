@@ -13,11 +13,16 @@ type Responder interface {
 
 // Response returns full response that can be used in scenarios where you want to control which http status you want
 // to return. Also when using this response you can add custom headers
-func Response[T any](status int, object T, headers ...string) Responder {
+func Response[T any](status int, object T, headersKV ...string) Responder {
 	result := &resp[T]{
 		status: status,
 		object: object,
 		header: make(http.Header),
+	}
+
+	// add headersKV
+	for i := 0; i < len(headersKV)/2; i++ {
+		result.header[headersKV[i*2]] = []string{headersKV[i*2+1]}
 	}
 
 	return result
