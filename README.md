@@ -1,6 +1,7 @@
 # Crest
 
-Simple CRUD rest. This project uses generic to convert functions to http handlers
+Simple CRUD rest. This project uses generic to convert functions to http handlers.
+This is POC and only create is currently `investigated`.
 
 # Example
 
