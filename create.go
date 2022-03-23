@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"reflect"
 
 	"github.com/phonkee/go-response/v2"
 )
@@ -36,7 +37,13 @@ func CreateHandler[S any, O any](
 			w.WriteHeader(responder.StatusCode())
 			_ = responder.Write(w)
 		default:
-			response.Result(result).Status(http.StatusCreated).Write(r, w)
+			re := response.New(http.StatusCreated)
+			if reflect.ValueOf(result).IsNil() {
+				re = re.Result(result)
+				return
+			}
+			re.Write(r, w)
+			return
 		}
 	})
 }
