@@ -18,7 +18,7 @@ func TestCreate(t *testing.T) {
 		}
 
 		// test create function
-		handler := CreateHandler(func(r *http.Request, serializer Serializer) (object Object, err error) {
+		handler := Handler(func(r *http.Request, serializer Serializer) (object Object, err error) {
 			return Object{}, nil
 		})
 

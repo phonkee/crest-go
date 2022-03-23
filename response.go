@@ -11,7 +11,8 @@ type Responder interface {
 	Header() http.Header
 }
 
-// Response returns full response that can be used
+// Response returns full response that can be used in scenarios where you want to control which http status you want
+// to return. Also when using this response you can add custom headers
 func Response[T any](status int, object T, headers ...string) Responder {
 	result := &resp[T]{
 		status: status,
