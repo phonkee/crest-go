@@ -21,7 +21,7 @@ type User struct {
 }
 
 // CreateUser knows how to create user
-func CreateUser(r *http.Request, s CreateUser) (*User, error) {
+func CreateUser(r *http.Request, s *CreateUser) (*User, error) {
     // some logic how to create user
 }
 
@@ -37,6 +37,7 @@ So let's try an example and let's suppose we have defined structures from previo
 
 ```go
 func CreateUser(*http.Request, s *CreateUser) (Responder, error) {
+    // create user and return back as custom response
     return Response(http.StatusCreated, User{ID:uuid.New().String}), nil
 }
 
